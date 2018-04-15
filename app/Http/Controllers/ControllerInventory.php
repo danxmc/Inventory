@@ -14,7 +14,29 @@ use App\Usuario;
 class ControllerInventory extends Controller
 {
     public function newMovimiento(Request $request){
-        
+        $movimiento = Movimiento::create($request->all());
+        $usuario = Usuario::find($request->post('usuario'));
+        $usuario->Movimiento()->save($movimiento);
+        $movimiento->Usuario()->associate($usuario);
+        if($request->post('type')=='1'){
+            $proveedor = Proveedor::find($request->post('proveedor'));
+            $proveedor->Movimientos()->save($movimiento);
+
+            $movimiento->Proveedor()->associate($proveedor);
+        }
+        $POST_articulos = $request->post('articulo');
+        $POST_cantidad = $request->post('cantidad');
+        foreach($POST_articulos as $key => $POST_articulo){
+            $articulo = Articulo::find($POST_articulo);
+            if($request->post('type')<4){
+                $articulo->stock = $articulo->stock + $POST_cantidad[$key];
+            }else{
+                $articulo->stock = $articulo->stock - $POST_cantidad[$key];
+            }
+            $articulo->save();
+            $movimiento->Articulos()->save($articulo, ['cantidad'=>$POST_cantidad[$key]]);
+        }
+        return redirect('/movimiento')->with("success", "Movimiento nuevo registrado");
     }
     public function showPrecio(Request $request){
         $articulo = Articulo::find($request->get('articulo'));

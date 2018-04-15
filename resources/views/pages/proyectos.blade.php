@@ -35,14 +35,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($proyectos as $key=>$proyecto)
+                                            @foreach($proyectos as $proyecto)
                                             <tr>
-                                                <td>{{$key+1}}</td>
-                                                <td>{{$proyecto->name}}</td>
+                                                <td>{{$proyecto->id}}</td>
+                                                <td><a href="/proyecto{{$proyecto->id}}">{{$proyecto->name}}</a></td>
                                                 <td>{{$proyecto->start_date}}</td>
                                                 <td>{{$proyecto->end_date}}</td>
-                                                <td>{{$proyecto->departamento->name}}</td>
-                                                <td>{{$proyecto->manager->rfc}}</td>
+                                                <td><a href="/departamento{{$proyecto->departamento->id}}">{{$proyecto->departamento->name}}</td>
+                                                <td><a href="/usuario{{$proyecto->manager->id}}">{{$proyecto->manager->rfc}}</a></td>
                                                 <td></td>
                                                 </tr>
                                             @endforeach

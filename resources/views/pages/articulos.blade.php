@@ -28,6 +28,7 @@
                                                     <th>SKU</th>
                                                     <th>Nombre</th>
                                                     <th>Stock</th>
+                                                    <th>Punto Abastecimiento</th>
                                                     <th>Categoría</th>
                                                     <th>Nivel de Riesgo</th>
                                                     <th>Proveedores</th>
@@ -42,16 +43,32 @@
                                             @else
                                             <tr>
                                             @endif
-                                                <td>{{$articulo->sku}}</td>
+                                                <td><a href="/articulo{{$articulo->id}}">{{$articulo->sku}}</a></td>
                                                 <td>{{$articulo->name}}</td>
-                                                <td>{{$articulo->stock}}{{$articulo->unit}}</td>
+                                                <td>{{$articulo->stock}} {{$articulo->unit}}</td>
+                                                <td>{{$articulo->pto_abastecimiento}}
                                                 <td>{{$articulo->category}}</td>
                                                 <td>{{$articulo->risk_level}}</td>
                                                 <td>
+                                                @php
+                                                $proveedores = [];
+                                                $idpro = [];
+                                                @endphp
                                                 @foreach($articulo->movimiento as $compra)
+                                                
                                                     @if(!is_null($compra->proveedor))
-                                                        {{$compra->proveedor->name}}, 
+                                                    @php
+                                                        $proveedores[] = $compra->proveedor->name;
+                                                        $idpro[] =  $compra->proveedor->id;
+                                                  @endphp
                                                     @endif
+                                                @endforeach
+                                                @php
+                                                $proveedores = array_unique($proveedores);
+                                                $idpro = array_unique($idpro);
+                                                @endphp
+                                                @foreach($proveedores as $key => $proveedor)
+                                                <a href="/proveedor{{$idpro[$key]}}">{{$proveedor}} <br>
                                                 @endforeach
                                                 </td>
                                                 <td>${{$articulo->price}}</td>

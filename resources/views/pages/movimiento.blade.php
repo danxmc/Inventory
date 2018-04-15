@@ -39,12 +39,33 @@
                                             @foreach($movimientos as $movimiento)
                                                 @foreach($movimiento->articulos as $articulo)
                                             <tr>
-                                                <td>{{$movimiento->id}}</td>
-                                                <td>{{$movimiento->type}}</td>
+                                                <td><a href="/movimiento{{$movimiento->id}}">{{$movimiento->id}}</a></td>
+                                                <td>
+                                                @switch($movimiento->type)
+                                                 @case(1)
+                                                    Compra
+                                                @break
+                                                @case(2)
+                                                    Devolución
+                                                @break
+                                                @case(3)
+                                                    Regalo
+                                                @break
+                                                @case(4)
+                                                    Prestamo
+                                                @break
+                                                @case(5)
+                                                    Extravío
+                                                @break
+                                                @case(6)
+                                                    Daño
+                                                @break
+                                                @endswitch
+                                                </td>
                                                 <td>{{$movimiento->created_at}}</td>
-                                                <td>{{$movimiento->usuario->name}}</td>
-                                                <td>{{$movimiento->usuario->departamento}}</td>
-                                                <td>{{$articulo->sku}}</td>
+                                                <td><a href="/usuario{{$movimiento->usuario->id}}">{{$movimiento->usuario->name}}</a></td>
+                                                <td><a href="/departamento{{$movimiento->usuario->departamento->id}}">{{$movimiento->usuario->departamento->name}}</td>
+                                                <td><a href="/articulo{{$articulo->id}}">{{$articulo->sku}}</a></td>
                                                 <td>{{$articulo->pivot->cantidad}}</td>
                                                 <td>{{$articulo->price * $articulo->pivot->cantidad}}</td>
                                                 </tr>
@@ -62,22 +83,22 @@
         <div class="form-group">
             <label for="name" class="col-sm-3 control-label">Tipo de Movimiento</label>
             <div class="col-sm-7">
-                <select class="form-control" required>
+                <select class="form-control" name="type" required>
                 <option disabled>Entradas</option>
-                <option value="+compra">Compra</option>
-                <option value="+devolucion">Devolución</option>
-                <option value="+regalo">Regalo</option>
+                <option value="1">Compra</option>
+                <option value="2">Devolución</option>
+                <option value="3">Regalo</option>
                 <option disabled>Salidas</option>
-                <option value="-prestamo">Prestamo</option>
-                <option value="-extravio">Extravío</option>
-                <option value="-daño">Daño</option>
+                <option value="4">Prestamo</option>
+                <option value="5">Extravío</option>
+                <option value="6">Daño</option>
                 </select>
             </div>
         </div>
         <div class="form-group">
             <label for="name" class="col-sm-3 control-label">Usuario Responsable</label>
             <div class="col-sm-7">
-                <select class="form-control" required>
+                <select class="form-control" name="usuario" required>
                 <option disabled selected value style="display:none">Asigne a un responsable</option>
                 @foreach($usuarios as $usuario)
                 <option value="{{$usuario->id}}">{{$usuario->name}}</option>
@@ -88,7 +109,7 @@
         <div class="form-group">
             <label for="name" class="col-sm-3 control-label">De ser compra, seleccione el proveedor</label>
             <div class="col-sm-7">
-                <select class="form-control" required>
+                <select class="form-control" name="proveedor" required>
                 <option value ="NA" selected >-----</option>
                 @foreach($proveedores as $proveedor)
                 <option value="{{$proveedor->id}}">{{$proveedor->name}}</option>

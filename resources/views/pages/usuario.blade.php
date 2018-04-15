@@ -7,96 +7,51 @@
         <div class="col-md-12">
             <div class="panel">
                 <div class="panel-body">
-                    <div>
+                    
                         <!-- Nav tabs -->
                         <ul class="list-inline tabs-bordered margin-b-20" role="tablist">
 <li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="ion-ios-person"></i> Usuarios</a></li>
 <li role="presentation"><a href="#new" aria-controls="new" role="tab" data-toggle="tab"><i class="ion-plus-circled"></i> Añadir</a></li>
                         </ul>
                         <!-- Tab panes -->
-                        <div class="tab-content">
-<div role="tabpanel" class="tab-pane active" id="list">
-    <div class="row">
-        <div class="col-sm-6 margin-b-20">
-            <div class="user-card clearfix">
-                <img src="assets/images/avtar-1.jpg" alt="" width="90">
-                <div class="user-card-content">
-                    <h4>Lara Smith</h4>
-                    <span><em>Front end developer</em></span>
-                    <div>
-                        <a href="#" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Follow</a>
-                        <a href="#" class="btn btn-xs btn-success"><i class="fa fa-envelope"></i> Message</a>
-                    </div>
-                </div>
-            </div><!--user card-->
-        </div>
-        <div class="col-sm-6 margin-b-20">
-            <div class="user-card clearfix">
-                <img src="assets/images/avtar-2.jpg" alt="" width="90">
-                <div class="user-card-content">
-                    <h4>John Smith</h4>
-                    <span><em>Front end developer</em></span>
-                    <div>
-                        <a href="#" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Follow</a>
-                        <a href="#" class="btn btn-xs btn-success"><i class="fa fa-envelope"></i> Message</a>
-                    </div>
-                </div>
-            </div><!--user card-->
-        </div>
-        <div class="col-sm-6">
-            <div class="user-card clearfix margin-b-20">
-                <img src="assets/images/avtar-3.jpg" alt="" width="90">
-                <div class="user-card-content">
-                    <h4>Lara Smith</h4>
-                    <span><em>Front end developer</em></span>
-                    <div>
-                        <a href="#" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Follow</a>
-                        <a href="#" class="btn btn-xs btn-success"><i class="fa fa-envelope"></i> Message</a>
-                    </div>
-                </div>
-            </div><!--user card-->
-        </div>
-        <div class="col-sm-6 margin-b-20">
-            <div class="user-card clearfix">
-                <img src="assets/images/avtar-4.jpg" alt="" width="90">
-                <div class="user-card-content">
-                    <h4>Steven Smith</h4>
-                    <span><em>Front end developer</em></span>
-                    <div>
-                        <a href="#" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Follow</a>
-                        <a href="#" class="btn btn-xs btn-success"><i class="fa fa-envelope"></i> Message</a>
-                    </div>
-                </div>
-            </div><!--user card-->
-        </div>
-        <div class="col-sm-6">
-            <div class="user-card clearfix">
-                <img src="assets/images/avtar-5.jpg" alt="" width="90">
-                <div class="user-card-content">
-                    <h4>Dwayne Smith</h4>
-                    <span><em>Front end developer</em></span>
-                    <div>
-                        <a href="#" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Follow</a>
-                        <a href="#" class="btn btn-xs btn-success"><i class="fa fa-envelope"></i> Message</a>
-                    </div>
-                </div>
-            </div><!--user card-->
-        </div>
-        <div class="col-sm-6">
-            <div class="user-card clearfix">
-                <img src="assets/images/avtar-7.jpg" alt="" width="90">
-                <div class="user-card-content">
-                    <h4>Lara Smith</h4>
-                    <span><em>Front end developer</em></span>
-                    <div>
-                        <a href="#" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Follow</a>
-                        <a href="#" class="btn btn-xs btn-success"><i class="fa fa-envelope"></i> Message</a>
-                    </div>
-                </div>
-            </div><!--user card-->
-        </div>
-    </div>
-</div>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="list">
+                            <header class="panel-heading">
+                                <h2 class="panel-title">Usuarios Registrados</h2>
+                            </header>
+                            <table id="datatable" class="table dt-responsive nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>RFC</th>
+                                                    <th>Nombre</th>
+                                                    <th>Posición</th>
+                                                    <th>Departamento</th>
+                                                    <th>Administrador</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($usuarios as $usuario)
+                                            <tr>
+                                                <td>{{$usuario->id}}</td>
+                                                <td><a href="/usuario{{$usuario->id}}">{{$usuario->rfc}}</a></td>
+                                                <td>{{$usuario->name}}</td>
+                                                <td>{{$usuario->position}}</td>
+                                                <td><a href="/departamento{{$usuario->departamento->id}}">{{$usuario->departamento->name}}</a></td>
+                                                <td>
+                                                @if(!is_null($usuario->proyecto))
+                                                {{$usuario->proyecto->name}}
+                                                @else
+                                                NA
+                                                @endif
+                                                </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                        </div>
+                   
+                    
 <div role="tabpanel" class="tab-pane" id="new">
     <form class="form-horizontal" method="POST" action="/usuario/nuevo">
     @csrf

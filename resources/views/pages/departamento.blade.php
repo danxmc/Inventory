@@ -31,10 +31,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($departamentos as $key=>$departamento)
+                                            @foreach($departamentos as $departamento)
                                             <tr>
-                                                <td>{{$key+1}}</td>
-                                                <td>{{$departamento->name}}</td>
+                                                <td>{{$departamento->id}}</td>
+                                                <td><a href="/departamento{{$departamento->id}}">{{$departamento->name}}</a></td>
                                                 <td></td>
                                                 </tr>
                                             @endforeach

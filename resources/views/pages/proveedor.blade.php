@@ -34,10 +34,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($proveedores as $key=>$proveedor)
+                                            @foreach($proveedores as $proveedor)
                                             <tr>
-                                                <td>{{$key+1}}</td>
-                                                <td>{{$proveedor->name}}</td>
+                                                <td>{{$proveedor->id}}</td>
+                                                <td><a href="/proveedor{{$proveedor->id}}"{{$proveedor->name}}</a></td>
                                                 <td>{{$proveedor->rfc}}</td>
                                                 <td>{{$proveedor->contact}}</td>
                                                 <td>{{$proveedor->movimientos->count()}}</td>

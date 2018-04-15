@@ -21,6 +21,7 @@ class Articulo extends Model
 
 
     public function Movimiento(){
-        return $this->belongsToMany('App\Movimiento', 'articulo_movimiento', 'articulo_sku', 'movimiento_id');
+        return $this->belongsToMany('App\Movimiento', 'articulo_movimiento', 'articulo_sku', 'movimiento_id')
+        ->withPivot('cantidad');
     }
 }

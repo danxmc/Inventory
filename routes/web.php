@@ -44,6 +44,18 @@ Route::get('/movimiento', function(){
     $usuarios = App\Usuario::all();
     return view('pages.movimiento', compact('movimientos', 'articulos', 'proveedores', 'usuarios'));
 });
+Route::get('/articulo{articulo}', function( App\Articulo $articulo){
+    return view('pages.articuloDetalle', compact('articulo'));
+});
+Route::get('/departamento{departamento}', function( App\Departamento $departamento){
+    return view('pages.departamentoDetalle', compact('departamento'));
+});
+Route::get('/usuario{usuario}', function( App\Usuario $usuario){
+    return view('pages.usuarioDetalle', compact('usuario'));
+});
+Route::get('/proveedor{proveedor}', function( App\Proveedor $proveedor){
+    return view('pages.proveedorDetalle', compact('proveedor'));
+});
 Route::post('/proyecto/nuevo', 'ControllerInventory@newProyecto');
 Route::post('/departamento/nuevo', 'ControllerInventory@newDepartamento');
 
