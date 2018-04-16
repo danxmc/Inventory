@@ -78,4 +78,29 @@ class ControllerInventory extends Controller
         $articulo->save();
         return redirect('/articulo')->with('success', 'Artículo nuevo registrado');
     }
+    public function deleteUsuario(Request $request){
+        $usuario = Usuario::find($request->post('id'));
+        $usuario->delete();
+        return redirect('/usuario')->with('success', 'Usuario dado de baja');
+    }
+    public function deleteArticulo(Request $request){
+        $articulo = Articulo::find($request->post('id'));
+        $articulo->delete();
+        return redirect('/articulo')->with('success', 'Artículo dado de baja');
+    }
+    public function deleteProveedor(Request $request){
+        $proveedor = Proveedor::find($request->post('id'));
+        $proveedor->delete();
+        return redirect('/proveedor')->with('success', 'Proveedor dado de baja');
+    }
+    public function deleteProyecto(Request $request){
+        $proyecto = Proyecto::find($request->post('id'));
+        $proyecto->delete();
+        return redirect('/proyecto')->with('success', 'Proyecto dado de baja');
+    }
+    public function deleteDepartamento(Request $request){
+        $departamento = Departamento::find($request->post('id'));
+        $departamento->delete();
+        return redirect('/departamento')->with('success', 'Departamento dado de baja');
+    }
 }

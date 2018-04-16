@@ -30,7 +30,7 @@
                                                     <th>RFC</th>
                                                     <th>Contacto</th>
                                                     <th>Ventas</th>
-                                                    <th>Acciones</th>
+                                                    <th>Dar de Baja</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -41,7 +41,12 @@
                                                 <td>{{$proveedor->rfc}}</td>
                                                 <td>{{$proveedor->contact}}</td>
                                                 <td>{{$proveedor->movimientos->count()}}</td>
-                                                <td></td>
+                                                <td><form method="POST" action="/proveedor/delete" onSubmit="return confirm('¿Seguro de dar de baja?')">
+                                                <input type="hidden" name="id" value="{{$proveedor->id}}">
+                                                <button type="submit" class="btn btn-info btn-circle btn-icon">
+                                                <i class="fa fa-trash"></i></button>
+                                                </form>
+                                                </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

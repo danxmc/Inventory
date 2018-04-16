@@ -21,6 +21,8 @@
                     <div class="panel-body">
                     <ul class="list-inline tabs-bordered margin-b-20" role="tablist">
                         <li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="ion-ios-person"></i>Usuarios</a></li>
+                        <li role="presentation" ><a href="#articulos" aria-controls="articulos" role="tab" data-toggle="tab"><i class="ion-ios-person"></i>Articulos en uso</a></li>
+                        <li role="presentation" ><a href="#proyectos" aria-controls="proyectos" role="tab" data-toggle="tab"><i class="ion-ios-person"></i>Proyectos</a></li>
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="list">
@@ -41,7 +43,7 @@
                                                 <tr>
                                                     <td>{{$usuario->id}}</td>
                                                     <td>{{$usuario->rfc}}</td>
-                                                    <td><a href="/usuario{{$usuario->id}}">{{$usuario->name}}</td>
+                                                    <td><a href="/usuario{{$usuario->id}}">{{$usuario->name}}</a></td>
                                                     <td>
                                                     @if(!is_null($usuario->proyecto))
                                                 {{$usuario->proyecto->name}}
@@ -49,6 +51,68 @@
                                                 NA
                                                 @endif
                                                 </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="articulos">
+                            <header class="panel-heading">
+                                <h2 class="panel-title">Articulos en uso</h2>
+                            </header>
+                            <table id="datatable2" class="table dt-responsive nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Movimiento</th>
+                                               
+                                                    <th>Articulo</th>
+                                                    <th>Motivo</th>
+                                                    <th>Responsable</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($departamento->usuarios as $usuario)
+                                            @foreach($usuario->movimiento as $movimiento)
+                                                @if($movimiento->type == 4)
+                                                @foreach($movimiento->articulos as $articulo)
+                                                <tr>
+                                                    <td><a href="/movimiento{{$movimiento->id}}">{{$movimiento->id}}</a></td>
+                                                    <td><a href="/articulo{{$articulo->id}}">{{$articulo->name}}</a></td>
+                                                    <td>Préstamo</td>
+                                                    <td><a href="/usuario{{$movimiento->usuario->id}}">{{$movimiento->usuario->name}}</a>
+                                                </td>
+                                                </tr>
+                                                @endforeach
+                                                @endif
+                                            @endforeach
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="proyectos">
+                            <header class="panel-heading">
+                                <h2 class="panel-title">Articulos en uso</h2>
+                            </header>
+                            <table id="datatable3" class="table dt-responsive nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                               
+                                                    <th>Departamento</th>
+                                                    <th>Responsable</th>
+                                                  
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($departamento->usuarios as $usuario)
+                                            @if(!is_null($usuario->proyecto))
+                                                <tr>
+                                                    <td>{{$usuario->proyecto->id}}</td>
+                                                    <td><a href="/proyecto{{$usuario->proyecto->id}}">{{$usuario->proyecto->name}}</a></td>
+                                                    <td><a href="/usuario{{$usuario->id}}">{{$usuario->name}}</a></td>
+                                                </td>
+                                                </tr>
+                                                @endif
                                             @endforeach
                                             </tbody>
                                         </table>
@@ -68,6 +132,10 @@
         <script>
             $(document).ready(function() {
         $('#datatable').dataTable();
+    
+        $('#datatable2').dataTable();
+    
+        $('#datatable3').dataTable();
         });
         </script>
 @stop

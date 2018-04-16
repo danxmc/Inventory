@@ -56,12 +56,20 @@ Route::get('/usuario{usuario}', function( App\Usuario $usuario){
 Route::get('/proveedor{proveedor}', function( App\Proveedor $proveedor){
     return view('pages.proveedorDetalle', compact('proveedor'));
 });
+Route::get('/movimiento{movimiento}', function( App\Movimiento $movimiento){
+    return view('pages.movimientoDetalle', compact('movimiento'));
+});
 Route::post('/proyecto/nuevo', 'ControllerInventory@newProyecto');
 Route::post('/departamento/nuevo', 'ControllerInventory@newDepartamento');
 
 Route::post('/movimiento/nuevo', 'ControllerInventory@newMovimiento');
 Route::post('/usuario/nuevo', 'ControllerInventory@newUsuario');
-
 Route::GET('/producto/precio', 'ControllerInventory@showPrecio');
 Route::post('/proveedor/nuevo', 'ControllerInventory@newProveedor');
 Route::post('/articulo/nuevo','ControllerInventory@newArticulo');
+
+Route::post('/usuario/delete', 'ControllerInventory@deleteUsuario');
+Route::post('/proveedor/delete', 'ControllerInventory@deleteProveedor');
+Route::post('/articulo/delete', 'ControllerInventory@deleteArticulo');
+Route::post('/departamento/delete', 'ControllerInventory@deleteDepartamento');
+Route::post('/proyecto/delete', 'ControllerInventory@deleteProyecto');

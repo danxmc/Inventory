@@ -35,7 +35,12 @@
                                             <tr>
                                                 <td>{{$departamento->id}}</td>
                                                 <td><a href="/departamento{{$departamento->id}}">{{$departamento->name}}</a></td>
-                                                <td></td>
+                                                <td><form method="POST" action="/departamento/delete" onSubmit="return confirm('¿Seguro de dar de baja?')">
+                                                <input type="hidden" name="id" value="{{$departamento->id}}">
+                                                <button type="submit" class="btn btn-info btn-circle btn-icon">
+                                                <i class="fa fa-trash"></i></button>
+                                                </form>
+                                                </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -55,7 +60,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-7">
-                <button type="submit" class="btn btn-lg btn-primary rounded">Añadir Proveedor</button>
+                <button type="submit" class="btn btn-lg btn-primary rounded">Añadir Departamento</button>
                 <div class="pull-right">
                 <button type="reset" class="btn btn-lg btn-warning rounded">Limpiar</button>
                 </div>

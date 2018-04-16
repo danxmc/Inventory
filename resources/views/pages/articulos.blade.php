@@ -20,6 +20,7 @@
                                 <div class="panel">
                                     <header class="panel-heading">
                                         <h2 class="panel-title">Articulos Registrados</h2>
+                                        <h2 class="pull-right" id="totalInventario"></h2>
                                     </header>
                                     <div class="panel-body">
                                         <table id="datatable" class="table dt-responsive nowrap">
@@ -34,9 +35,13 @@
                                                     <th>Proveedores</th>
                                                     <th>Costo</th>
                                                     <th>Total</th>
+                                                    <th>Dar de Baja</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            @php
+                                            $total = 0;
+                                            @endphp
                                             @foreach($articulos as $articulo)
                                             @if($articulo->stock <= $articulo->pto_abastecimiento)
                                             <tr class="danger">
@@ -73,6 +78,15 @@
                                                 </td>
                                                 <td>${{$articulo->price}}</td>
                                                 <td>${{$articulo->price * $articulo->stock}}</td>
+                                                @php
+                                                $total += $articulo->price * $articulo->stock;
+                                                @endphp
+                                                <td><form method="POST" action="/articulo/delete" onSubmit="return confirm('¿Seguro de dar de baja?')">
+                                                <input type="hidden" name="id" value="{{$articulo->id}}">
+                                                <button type="submit" class="btn btn-info btn-circle btn-icon">
+                                                <i class="fa fa-trash"></i></button>
+                                                </form>
+                                                </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -174,5 +188,6 @@
             $(document).ready(function() {
         $('#datatable').dataTable();
         });
+        $("#totalInventario").text("${{$total}}");
         </script>
 @stop

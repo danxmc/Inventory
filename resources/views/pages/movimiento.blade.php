@@ -20,6 +20,7 @@
                                 <div class="panel">
                                     <header class="panel-heading">
                                         <h2 class="panel-title">Movimientos Registrados</h2>
+                                        
                                     </header>
                                     <div class="panel-body">
                                         <table id="datatable" class="table table-striped dt-responsive nowrap">
@@ -36,6 +37,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            
                                             @foreach($movimientos as $movimiento)
                                                 @foreach($movimiento->articulos as $articulo)
                                             <tr>
@@ -64,10 +66,11 @@
                                                 </td>
                                                 <td>{{$movimiento->created_at}}</td>
                                                 <td><a href="/usuario{{$movimiento->usuario->id}}">{{$movimiento->usuario->name}}</a></td>
-                                                <td><a href="/departamento{{$movimiento->usuario->departamento->id}}">{{$movimiento->usuario->departamento->name}}</td>
+                                                <td><a href="/departamento{{$movimiento->usuario->departamento->id}}">{{$movimiento->usuario->departamento->name}}</a></td>
                                                 <td><a href="/articulo{{$articulo->id}}">{{$articulo->sku}}</a></td>
                                                 <td>{{$articulo->pivot->cantidad}}</td>
                                                 <td>{{$articulo->price * $articulo->pivot->cantidad}}</td>
+                                                
                                                 </tr>
                                             @endforeach
                                             @endforeach
@@ -83,7 +86,8 @@
         <div class="form-group">
             <label for="name" class="col-sm-3 control-label">Tipo de Movimiento</label>
             <div class="col-sm-7">
-                <select class="form-control" name="type" required>
+                <select class="form-control" name="type" onChange="showProveedor(this.value)" required>
+                <option disabled selected value style="display:none">Seleccione Tipo</option>
                 <option disabled>Entradas</option>
                 <option value="1">Compra</option>
                 <option value="2">Devolución</option>
@@ -106,16 +110,8 @@
                 </select>
             </div>
         </div>
-        <div class="form-group">
-            <label for="name" class="col-sm-3 control-label">De ser compra, seleccione el proveedor</label>
-            <div class="col-sm-7">
-                <select class="form-control" name="proveedor" required>
-                <option value ="NA" selected >-----</option>
-                @foreach($proveedores as $proveedor)
-                <option value="{{$proveedor->id}}">{{$proveedor->name}}</option>
-                @endforeach
-                </select>
-            </div>
+        <div class="form-group" id="proveedorSection">
+            
         </div>
         <hr>
         
@@ -134,7 +130,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-7">
-                <button type="submit" class="btn btn-lg btn-primary rounded">Añadir Proveedor</button>
+                <button type="submit" class="btn btn-lg btn-primary rounded">Realizar Movimiento</button>
                 <div class="pull-right">
                 <button type="reset"  class="btn btn-lg btn-warning rounded">Limpiar</button>
                 </div>
@@ -186,6 +182,10 @@
            $('#'+spanId).text(""+data); // show response from the php script.
        }
      });
+     $('.totales').each(function(){
+    sum += parseFloat($(this).text());  // Or this.innerHTML, this.innerText
+});
+$('#total').text("$"+sum);
             }
         function getTotal(value, id){
             let value1 = value;
@@ -207,7 +207,14 @@ $('.totales').each(function(){
 });
 $('#total').text("$"+sum);
         }
-
+function showProveedor(valor){
+    let value = valor;
+    if(value == 1){
+        $("#proveedorSection").html('<label for="name" class="col-sm-3 control-label">Seleccione el proveedor</label><div class="col-sm-7"><select class="form-control" name="proveedor" required>@foreach($proveedores as $proveedor)<option value="{{$proveedor->id}}">{{$proveedor->name}}</option>@endforeach</select></div>');
+    }else{
+        $("#proveedorSection").html("");
+    }
+}
        
         </script>
 @stop

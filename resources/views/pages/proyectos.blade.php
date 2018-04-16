@@ -31,7 +31,7 @@
                                                     <th>Fecha Fin</th>
                                                     <th>Departamento</th>
                                                     <th>Responsable</th>
-                                                    <th>Acciones</th>
+                                                    <th>Dar de Baja</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -43,7 +43,12 @@
                                                 <td>{{$proyecto->end_date}}</td>
                                                 <td><a href="/departamento{{$proyecto->departamento->id}}">{{$proyecto->departamento->name}}</td>
                                                 <td><a href="/usuario{{$proyecto->manager->id}}">{{$proyecto->manager->rfc}}</a></td>
-                                                <td></td>
+                                                <td><form method="POST" action="/proyecto/delete" onSubmit="return confirm('¿Seguro de dar de baja?')">
+                                                <input type="hidden" name="id" value="{{$proyecto->id}}">
+                                                <button type="submit" class="btn btn-info btn-circle btn-icon">
+                                                <i class="fa fa-trash"></i></button>
+                                                </form>
+                                                </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -98,7 +103,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-7">
-                <button type="submit" class="btn btn-lg btn-primary rounded">Añadir Proveedor</button>
+                <button type="submit" class="btn btn-lg btn-primary rounded">Añadir Proyecto</button>
                 <div class="pull-right">
                 <button type="reset" class="btn btn-lg btn-warning rounded">Limpiar</button>
                 </div>
