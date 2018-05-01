@@ -10,7 +10,7 @@
                     <div>
                         <!-- Nav tabs -->
                         <ul class="list-inline tabs-bordered margin-b-20" role="tablist">
-<li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="ion-ios-person"></i> Proyectos</a></li>
+<li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="fa fa-braille"></i> Proyectos</a></li>
 <li role="presentation"><a href="#new" aria-controls="new" role="tab" data-toggle="tab"><i class="ion-plus-circled"></i> Añadir</a></li>
                         </ul>
                         <!-- Tab panes -->
@@ -38,12 +38,13 @@
                                             @foreach($proyectos as $proyecto)
                                             <tr>
                                                 <td>{{$proyecto->id}}</td>
-                                                <td><a href="/proyecto{{$proyecto->id}}">{{$proyecto->name}}</a></td>
+                                                <td>{{$proyecto->name}}</td>
                                                 <td>{{$proyecto->start_date}}</td>
                                                 <td>{{$proyecto->end_date}}</td>
                                                 <td><a href="/departamento{{$proyecto->departamento->id}}">{{$proyecto->departamento->name}}</td>
                                                 <td><a href="/usuario{{$proyecto->manager->id}}">{{$proyecto->manager->rfc}}</a></td>
                                                 <td><form method="POST" action="/proyecto/delete" onSubmit="return confirm('¿Seguro de dar de baja?')">
+                                                @csrf
                                                 <input type="hidden" name="id" value="{{$proyecto->id}}">
                                                 <button type="submit" class="btn btn-info btn-circle btn-icon">
                                                 <i class="fa fa-trash"></i></button>
@@ -82,7 +83,7 @@
         <div class="form-group">
             <label for="about" class="col-sm-3 control-label">Departamento</label>
             <div class="col-sm-7">
-                <select required class="form-control" name="departamento">
+                <select required class="form-control" name="departamento" onchange="showResponsables(this.value)">
                 <option disabled selected style="display:none">Asigne un departamento</option>
                     @foreach($departamentos as $departamento)
                     <option value="{{$departamento->id}}">{{$departamento->name}}</option>
@@ -93,11 +94,8 @@
         <div class="form-group">
             <label for="about" class="col-sm-3 control-label">Responsable</label>
             <div class="col-sm-7">
-                <select required class="form-control" name="Responsable">
+                <select required id="selectResponsables" class="form-control" name="Responsable">
                 <option disabled selected style="display:none">Asigne un Responsable</option>
-                    @foreach($Responsables as $Responsable)
-                    <option value="{{$Responsable->id}}">{{$Responsable->name}}</option>
-                    @endforeach
                 </select>
             </div>
         </div>
@@ -131,4 +129,19 @@
         $('#datatable').dataTable();
         });
         </script>
+<script>
+function showResponsables(id){
+            let ide = id;
+            let url = "/departamento/responsable";
+            $.ajax({
+       type: "GET",
+       url: url,
+       data: "id="+ide, // serializes the form's elements.
+       success: function(data)
+       {
+           $('#selectResponsables').html(data); // show response from the php script.
+       }
+     });
+            }
+</script>
 @stop

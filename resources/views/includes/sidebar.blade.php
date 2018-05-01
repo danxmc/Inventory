@@ -11,14 +11,14 @@
                         </li>
                         <li >
                             <a href="/usuario">
-                                <i class="fa fa-envelope"></i>
+                                <i class="fa fa-user"></i>
                                 <span class="menu-text">Usuarios</span>
                                 <span class="selected"></span>
                             </a>
                         </li>
                         <li >
                             <a href="/proveedor">
-                                <i class="fa fa-bar-chart-o"></i>
+                                <i class="fa fa-address-book"></i>
                                 <span class="menu-text">Proveedores</span>
                                 <span class="selected"></span>
                             </a>
@@ -39,14 +39,14 @@
                         </li>
                         <li>
                             <a href="/proyecto">
-                                <i class="fa fa-calendar"></i>
+                                <i class="fa fa-braille"></i>
                                 <span class="menu-text">Proyectos</span>
                                 <span class="selected"></span>
                             </a>
                         </li>
                         <li>
                             <a href="/movimiento">
-                                <i class="fa fa-user"></i>
+                                <i class="fa fa-align-right"></i>
                                 <span class="menu-text">Movimientos</span>
                                 <span class="selected"></span>
                             </a>

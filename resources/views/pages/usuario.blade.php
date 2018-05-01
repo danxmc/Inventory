@@ -47,6 +47,7 @@
                                                 @endif
                                                 </td>
                                                 <td><form method="POST" action="/usuario/delete" onSubmit="return confirm('¿Seguro de dar de baja?')">
+                                                @csrf
                                                 <input type="hidden" name="id" value="{{$usuario->id}}">
                                                 <button type="submit" class="btn btn-info btn-circle btn-icon ">
                                                 <i class="fa fa-trash"></i></button>

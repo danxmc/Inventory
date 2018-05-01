@@ -56,7 +56,7 @@
                 <div class="panel">
                     <div class="panel-body">
                     <ul class="list-inline tabs-bordered margin-b-20" role="tablist">
-                        <li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="ion-ios-person"></i>Movimientos Registrados</a></li>
+                        <li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="fa fa-align-right"></i>Movimientos Registrados</a></li>
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="list">

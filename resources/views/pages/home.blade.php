@@ -2,7 +2,9 @@
 @section('css')
 @stop
 @section('content')
-este es el contenido
+<h1>Comienza a administrar tu inventario</h1>
+<img src="images/logo.png"></img>
+
 @stop
 @section('scripts')
 @stop

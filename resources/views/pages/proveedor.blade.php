@@ -10,7 +10,7 @@
                     <div>
                         <!-- Nav tabs -->
                         <ul class="list-inline tabs-bordered margin-b-20" role="tablist">
-<li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="ion-ios-person"></i> Proveedores</a></li>
+<li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="fa fa-address-book"></i> Proveedores</a></li>
 <li role="presentation"><a href="#new" aria-controls="new" role="tab" data-toggle="tab"><i class="ion-plus-circled"></i> Añadir</a></li>
                         </ul>
                         <!-- Tab panes -->
@@ -37,11 +37,12 @@
                                             @foreach($proveedores as $proveedor)
                                             <tr>
                                                 <td>{{$proveedor->id}}</td>
-                                                <td><a href="/proveedor{{$proveedor->id}}"{{$proveedor->name}}</a></td>
+                                                <td><a href="/proveedor{{$proveedor->id}}">{{$proveedor->name}}</a></td>
                                                 <td>{{$proveedor->rfc}}</td>
                                                 <td>{{$proveedor->contact}}</td>
                                                 <td>{{$proveedor->movimientos->count()}}</td>
                                                 <td><form method="POST" action="/proveedor/delete" onSubmit="return confirm('¿Seguro de dar de baja?')">
+                                                @csrf
                                                 <input type="hidden" name="id" value="{{$proveedor->id}}">
                                                 <button type="submit" class="btn btn-info btn-circle btn-icon">
                                                 <i class="fa fa-trash"></i></button>

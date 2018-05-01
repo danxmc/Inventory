@@ -10,6 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/departamento/responsable', function(Request $request){
+    $departamento = App\Departamento::find($_GET['id']);
+    $usuarios = $departamento->usuarios;
+    $select = '<option disabled selected style="display:none">Asigne un Responsable</option>';
+    foreach($usuarios as $usuario){
+        if(is_null($usuario->proyecto)){
+            $select.='<option value="'.$usuario->id.'">'.$usuario->name.'</option>';
+        }
+    }
+    return response($select);     
+});
 
 Route::get('/', function () {
     return view('pages.home');
@@ -30,8 +41,7 @@ Route::get('/usuario', function(){
 Route::get('/proyecto', function(){
     $proyectos = App\Proyecto::all();
     $departamentos = App\Departamento::all();
-    $Responsables = App\Usuario::has('proyecto', '0')->get();
-    return view('pages.proyectos', compact('proyectos','departamentos', 'Responsables'));
+    return view('pages.proyectos', compact('proyectos','departamentos'));
 });
 Route::get('/articulo', function(){
     $articulos = App\Articulo::all();

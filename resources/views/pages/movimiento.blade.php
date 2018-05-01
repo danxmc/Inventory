@@ -10,7 +10,7 @@
                     <div>
                         <!-- Nav tabs -->
                         <ul class="list-inline tabs-bordered margin-b-20" role="tablist">
-<li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="ion-ios-person"></i> Movimientos</a></li>
+<li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="fa fa-align-right"></i> Movimientos</a></li>
 <li role="presentation"><a href="#new" aria-controls="new" role="tab" data-toggle="tab"><i class="ion-plus-circled"></i> Añadir</a></li>
                         </ul>
                         <!-- Tab panes -->

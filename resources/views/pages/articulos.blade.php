@@ -10,7 +10,7 @@
                     <div>
                         <!-- Nav tabs -->
                         <ul class="list-inline tabs-bordered margin-b-20" role="tablist">
-<li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="ion-ios-person"></i> Articulos</a></li>
+<li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="fa fa-cube"></i> Articulos</a></li>
 <li role="presentation"><a href="#new" aria-controls="new" role="tab" data-toggle="tab"><i class="ion-plus-circled"></i> Añadir</a></li>
                         </ul>
                         <!-- Tab panes -->
@@ -82,6 +82,7 @@
                                                 $total += $articulo->price * $articulo->stock;
                                                 @endphp
                                                 <td><form method="POST" action="/articulo/delete" onSubmit="return confirm('¿Seguro de dar de baja?')">
+                                                @csrf
                                                 <input type="hidden" name="id" value="{{$articulo->id}}">
                                                 <button type="submit" class="btn btn-info btn-circle btn-icon">
                                                 <i class="fa fa-trash"></i></button>
