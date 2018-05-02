@@ -34,6 +34,6 @@ class CreateArticuloMovimientosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articulo_movimientos');
+        Schema::dropIfExists('articulo_movimiento');
     }
 }
