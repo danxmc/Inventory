@@ -24,7 +24,7 @@ class CreateProyectosTable extends Migration
             $table->integer('departamento_id')->unsigned()->index()->nullable();
             $table->foreign('departamento_id')->references('id')->on('departamentos');
 
-            $table->integer('mngr_RFC')->unsigned()->index()->nullable();
+            $table->char('mngr_RFC', 9)->unsigned()->index()->nullable();
             $table->foreign('mngr_RFC')->references('rfc')->on('usuarios');
         });
     }
